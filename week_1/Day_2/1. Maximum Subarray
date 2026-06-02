@@ -1,1 +1,36 @@
+import java.util.Scanner;
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int sum = 0;
+        int maxi = Integer.MIN_VALUE;
 
+        for(int i = 0; i < nums.length; i++) {
+            sum = sum + nums[i];
+
+            if(sum > maxi) {
+                maxi = sum;
+            }
+            if(sum < 0) {
+                sum = 0;
+            }
+        }
+        return maxi;
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter size of array: ");
+        int n = sc.nextInt();
+        int[] nums = new int[n];
+
+        System.out.println("Enter array elements:");
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+        Solution obj = new Solution();
+        int result = obj.maxSubArray(nums);
+
+        System.out.println("Maximum Subarray Sum = " + result);
+
+        sc.close();
+    }
+}
