@@ -1,4 +1,3 @@
-//3. find all anagram
 import java.util.* ;
 class Main {
      public  static List<Integer> findAnagrams(String s, String p) {
