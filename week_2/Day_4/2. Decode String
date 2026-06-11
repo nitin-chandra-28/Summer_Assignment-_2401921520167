@@ -31,7 +31,7 @@ class Solution {
                 sb = prevString;
             }
 
-            else { // letter
+            else {
                 sb.append(ch);
             }
         }
