@@ -1,41 +1,40 @@
 class Solution {
-    public String decodeString(String s) {
-        Stack<Integer> countSt = new Stack<>();
-        Stack<StringBuilder> stringSt = new Stack<>();
+    int i = 0;
 
-        StringBuilder sb = new StringBuilder();
+    public String decodeString(String s) {
+        return helper(s);
+    }
+    private String helper(String s) {
+        StringBuilder ans = new StringBuilder();
         int num = 0;
 
-        for (char ch : s.toCharArray()) {
+        while (i < s.length() && s.charAt(i) != ']') {
+
+            char ch = s.charAt(i);
 
             if (Character.isDigit(ch)) {
                 num = num * 10 + (ch - '0');
+                i++;
             }
-
+            else if (Character.isLetter(ch)) {
+                ans.append(ch);
+                i++;
+            }
             else if (ch == '[') {
-                countSt.push(num);
-                stringSt.push(sb);
+                i++; 
 
-                num = 0;
-                sb = new StringBuilder();
-            }
+                String decoded = helper(s);
 
-            else if (ch == ']') {
-                int count = countSt.pop();
-                StringBuilder prevString = stringSt.pop();
-
-                for (int i = 0; i < count; i++) {
-                    prevString.append(sb);
+                for (int j = 0; j < num; j++) {
+                    ans.append(decoded);
                 }
 
-                sb = prevString;
+                num = 0;
             }
-
-            else {
-                sb.append(ch);
-            }
+        if (i < s.length() && s.charAt(i) == ']') {
+            i++; 
         }
 
-        return sb.toString();
+        return ans.toString();
     }
 }
