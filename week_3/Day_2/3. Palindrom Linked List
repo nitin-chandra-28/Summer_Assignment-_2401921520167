@@ -1,1 +1,39 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        // Create a copy of the list
+        ListNode dummy = new ListNode(0);
+        ListNode tail = dummy;
+        ListNode temp = head;
 
+        while (temp != null) {
+            tail.next = new ListNode(temp.val);
+            tail = tail.next;
+            temp = temp.next;
+        }
+
+        // Reverse the copied list
+        ListNode prev = null;
+        temp = dummy.next;
+
+        while (temp != null) {
+            ListNode front = temp.next;
+            temp.next = prev;
+            prev = temp;
+            temp = front;
+        }
+
+        // Compare original and reversed copy
+        ListNode temp1 = head;
+        ListNode temp2 = prev;
+
+        while (temp1 != null && temp2 != null) {
+            if (temp1.val != temp2.val) {
+                return false;
+            }
+            temp1 = temp1.next;
+            temp2 = temp2.next;
+        }
+
+        return true;
+    }
+}
